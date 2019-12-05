@@ -30,27 +30,7 @@ class Note extends Component {
       this.onIdle = this.onIdle.bind(this)
       this.autosave = this.autosave.bind(this)
       this.reverseApi = this.reverseApi.bind(this)
-      let emptyStorage = {
-
-        _id:this._id,
-        blocks:[]
-      }
-      if(localStorage.getItem(this._id) == null){
-
-        console.log("localstorage is not")
-        localStorage.setItem(this._id,JSON.stringify(emptyStorage))
-  
-  
-      }else{
-  
-        this.localstorage = localStorage.getItem(this._id)
-        
-      }
-
-      this.parsed = JSON.parse(localStorage.getItem(this._id))
-
-
-
+      
       
       
     }
@@ -150,6 +130,26 @@ class Note extends Component {
 
 
    reverseApi(){
+
+    let emptyStorage = {
+
+      _id:this._id,
+      blocks:[]
+    }
+    if(localStorage.getItem(this._id) == null){
+
+      localStorage.setItem(this._id,JSON.stringify(emptyStorage))
+
+
+    }else{
+
+      this.localstorage = localStorage.getItem(this._id)
+      
+    }
+
+    this.parsed = JSON.parse(localStorage.getItem(this._id))
+
+
 
     let reverser = (result) => {
 
