@@ -36,7 +36,8 @@ class Notes extends Component{
             },
             body: JSON.stringify({
 
-                title:inputValue
+                title:inputValue,
+                blocks:[]
             })
         }).then(res => res.json())
             .then(result =>  this.setState(state => {
@@ -89,7 +90,7 @@ class Notes extends Component{
                 
                 return (
 
-                    <Card  key={item._id}  to={{pathname: `/notes/${item._id}`, state: {...item } }} as={Link}>
+                    <Card  key={item._id}  to={{pathname: `/notes/${item._id}`}} as={Link}>
                         <Card.Content header={item.title} />
                             <Card.Content />
                             <Card.Content >

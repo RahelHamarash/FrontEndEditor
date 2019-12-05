@@ -5,7 +5,7 @@ import './App.css'
 import Note from "./components/Note/Note"
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import { Container , Icon , Menu , Segment} from "semantic-ui-react";
-import { Switch, Route ,Link , BrowserRouter as Router } from 'react-router-dom' ;
+import { Switch, Route ,Link , BrowserRouter as Router , histroy } from 'react-router-dom' ;
 import {Home} from "./components/Home"
 import Notes from "./components/Notes" 
 class App extends React.Component {
