@@ -11,6 +11,8 @@ class Note extends Component {
       super(props)
       this._id = this.props.match.params.id
 
+
+
       this.state = {
   
         patch : {
@@ -28,6 +30,25 @@ class Note extends Component {
       this.onIdle = this.onIdle.bind(this)
       this.autosave = this.autosave.bind(this)
       this.reverseApi = this.reverseApi.bind(this)
+      let emptyStorage = {
+
+        _id:this._id,
+        blocks:[]
+      }
+      if(localStorage.getItem(this._id) == null){
+
+        console.log("localstorage is not")
+        localStorage.setItem(this._id,JSON.stringify(emptyStorage))
+  
+  
+      }else{
+  
+        this.localstorage = localStorage.getItem(this._id)
+        
+      }
+
+      this.parsed = JSON.parse(localStorage.getItem(this._id))
+
 
 
       
@@ -84,6 +105,7 @@ class Note extends Component {
 
 
     this.editor.destroy()
+    localStorage.removeItem(this._id)
     
 
   }
@@ -129,9 +151,6 @@ class Note extends Component {
 
    reverseApi(){
 
-    let localstorage = localStorage.getItem(this._id)
-    let parsed = JSON.parse(localstorage)
-
     let reverser = (result) => {
 
       const div =  document.createElement("DIV")
@@ -150,7 +169,7 @@ class Note extends Component {
       this.editor.setContents(div.innerHTML)
 
     }
-    if(parsed.blocks.length === 0){
+    if(this.parsed.blocks.length == 0) {
 
       fetch("http://localhost:3333/notes/"+this._id)
             
@@ -163,7 +182,7 @@ class Note extends Component {
 
     }else{
       
-      reverser(parsed)
+      reverser(this.parsed)
       console.log("patch request not sent yet!! localstorage was returned")
     
     }
@@ -174,6 +193,8 @@ class Note extends Component {
 
        
   }
+
+
 
   autosave(){
 
